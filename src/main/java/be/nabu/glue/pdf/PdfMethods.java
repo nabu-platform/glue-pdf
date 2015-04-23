@@ -64,11 +64,15 @@ public class PdfMethods {
 		for (int i = 0; i < expectedPages.size(); i++) {
 			// only makes sense to compare if there is a target page
 			if (actualPages.size() >= i - 1) {
+				PageConfiguration pageConfiguration = pdfConfiguration == null ? null : pdfConfiguration.getPage(i);
+				// allows you to skip a page entirely
+				if (pageConfiguration != null && Boolean.TRUE.equals(pageConfiguration.getIgnore())) {
+					continue;
+				}
 				PDPage expectedPage = expectedPages.get(i);
 				PDPage actualPage = actualPages.get(i);
 				BufferedImage expectedImage = expectedPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
 				BufferedImage actualImage = actualPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
-				PageConfiguration pageConfiguration = pdfConfiguration == null ? null : pdfConfiguration.getPage(i);
 				ImageConfiguration imageConfiguration = pageConfiguration == null && configurationContent instanceof ImageConfiguration ? (ImageConfiguration) configurationContent : null;
 				correct &= ImageMethods.checkImage("[page " + (i + 1) + "] " + message, expectedImage, actualImage, pageConfiguration == null ? imageConfiguration : pageConfiguration, threshold, fail);
 				// add the diff image to the list, otherwise you only get the last page
