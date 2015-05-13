@@ -45,6 +45,7 @@ public class PdfMethods {
 	
 	@SuppressWarnings("unchecked")
 	public static boolean checkPdf(String message, Object expectedPdf, Object actualPdf, Object configurationContent, Double threshold, boolean fail) throws IOException, JAXBException {
+		int dpi = Integer.parseInt(ScriptMethods.environment("pdf.dpi", "200"));
 		PDDocument expected = PDDocument.load(new ByteArrayInputStream(ScriptMethods.bytes(expectedPdf))); 
 		PDDocument actual = PDDocument.load(new ByteArrayInputStream(ScriptMethods.bytes(actualPdf)));
 		List<PDPage> expectedPages = expected.getDocumentCatalog().getAllPages();
@@ -71,8 +72,8 @@ public class PdfMethods {
 				}
 				PDPage expectedPage = expectedPages.get(i);
 				PDPage actualPage = actualPages.get(i);
-				BufferedImage expectedImage = expectedPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
-				BufferedImage actualImage = actualPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
+				BufferedImage expectedImage = expectedPage.convertToImage(BufferedImage.TYPE_INT_RGB, dpi);
+				BufferedImage actualImage = actualPage.convertToImage(BufferedImage.TYPE_INT_RGB, dpi);
 				ImageConfiguration imageConfiguration = pageConfiguration == null && configurationContent instanceof ImageConfiguration ? (ImageConfiguration) configurationContent : null;
 				correct &= ImageMethods.checkImage("[page " + (i + 1) + "] " + message, expectedImage, actualImage, pageConfiguration == null ? imageConfiguration : pageConfiguration, threshold, fail);
 				// add the diff image to the list, otherwise you only get the last page
