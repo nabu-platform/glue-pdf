@@ -4,6 +4,7 @@
 	<artifactId>glue-pdf</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>glue-pdf</name>
+	<url>https://github.com/nablex/glue-pdf</url>
 	<build>
 		<plugins>
 			<plugin>
@@ -18,6 +19,19 @@
 				<artifactId>maven-bundle-plugin</artifactId>
 				<version>2.3.7</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Source-Url>${project.url}</Source-Url>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Build-Version>${project.version}</Build-Version>
+						</manifestEntries>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
