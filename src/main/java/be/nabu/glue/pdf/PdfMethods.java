@@ -16,7 +16,9 @@ import be.nabu.glue.images.ImageConfiguration;
 import be.nabu.glue.images.ImageMethods;
 import be.nabu.glue.impl.methods.ScriptMethods;
 import be.nabu.glue.impl.methods.TestMethods;
+import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 
+@MethodProviderClass(namespace = "pdf")
 public class PdfMethods {
 	
 	public static boolean validatePdf(String message, Object expected, Object actual) throws IOException, JAXBException {
