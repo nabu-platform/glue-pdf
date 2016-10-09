@@ -11,11 +11,11 @@ import javax.xml.bind.JAXBException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
-import be.nabu.glue.ScriptRuntime;
+import be.nabu.glue.core.impl.methods.ScriptMethods;
+import be.nabu.glue.core.impl.methods.TestMethods;
 import be.nabu.glue.images.ImageConfiguration;
 import be.nabu.glue.images.ImageMethods;
-import be.nabu.glue.impl.methods.ScriptMethods;
-import be.nabu.glue.impl.methods.TestMethods;
+import be.nabu.glue.utils.ScriptRuntime;
 import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 
 @MethodProviderClass(namespace = "pdf")
